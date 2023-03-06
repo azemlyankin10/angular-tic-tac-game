@@ -8,6 +8,7 @@ export type players = 'X' | 'O';
     styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
+    turnsCount = 0;
     isGameGoOn = true;
     winner = '';
 
@@ -36,6 +37,7 @@ export class GameComponent {
 
     chooseElem(index: number) {
         if (this.elementsCount[index] || !this.isGameGoOn) return;
+        this.turnsCount = this.turnsCount + 1;
 
         this.history[this.turn].push(index);
         this.elementsCount[index] = this.turn;
@@ -57,9 +59,17 @@ export class GameComponent {
         } else {
             this.turn = 'X';
         }
+
+        console.log(this.turnsCount);
+        console.log(this.elementsCount.length);
+
+        if (this.turnsCount === this.elementsCount.length) {
+            this.isGameGoOn = false;
+        }
     }
 
     tryAgain() {
+        this.turnsCount = 0;
         this.isGameGoOn = true;
         this.winner = '';
 
