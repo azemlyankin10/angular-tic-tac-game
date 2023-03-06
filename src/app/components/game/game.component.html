@@ -1,0 +1,13 @@
+<div class="grid container">
+    <button
+        *ngFor="let elem of elementsCount; let i = index"
+        class="elem border border-primary"
+        [ngClass]="{
+            'bg-warning': elem === 'X',
+            'bg-info': elem === 'O'
+        }"
+        (click)="chooseElem(i)"
+    >
+        {{ elem }}
+    </button>
+</div>
